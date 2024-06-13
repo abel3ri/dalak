@@ -1,10 +1,12 @@
-import 'package:dalak/controllers/FormValidator.dart';
-import 'package:dalak/providers/SignupFormProvider.dart';
-import 'package:dalak/widgets/CustomAppBar.dart';
-import 'package:dalak/widgets/LoginSignupInput.dart';
+import 'package:dalak_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
+import 'package:dalak_app/controllers/FormValidator.dart';
+import 'package:dalak_app/providers/SignupFormProvider.dart';
+import 'package:dalak_app/widgets/CustomAppBar.dart';
+import 'package:dalak_app/widgets/LoginSignupInput.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -18,7 +20,7 @@ class SignupPage extends StatelessWidget {
           onPressed: () {
             GoRouter.of(context).pop();
           },
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
         ),
       ),
       body: Padding(
@@ -27,7 +29,7 @@ class SignupPage extends StatelessWidget {
           horizontal: MediaQuery.of(context).size.width * 0.06,
         ),
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Form(
             key: signupProvider.formKey,
             child: Column(
@@ -93,13 +95,20 @@ class SignupPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 FilledButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (signupProvider.formKey.currentState!.validate()) {
-                      print("Hello");
+                      try {
+                        await auth.signInWithEmailAndPassword(
+                          email: signupProvider.emailController.text,
+                          password: signupProvider.passwordController.text,
+                        );
+                      } catch (err) {
+                        print(err);
+                      }
                     }
                   },
-                  style: ButtonStyle(),
-                  child: Text("Create account"),
+                  style: const ButtonStyle(),
+                  child: const Text("Create account"),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
@@ -107,7 +116,7 @@ class SignupPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an account?"),
+                    const Text("Already have an account?"),
                     TextButton(
                       onPressed: () {
                         GoRouter.of(context).pushReplacementNamed("login");

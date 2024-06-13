@@ -1,4 +1,4 @@
-import 'package:dalak/widgets/CustomAppBar.dart';
+import 'package:dalak_app/widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,7 +14,7 @@ class OnBoardingPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: TextButton(
               onPressed: () {},
-              child: Text("Skip"),
+              child: const Text("Skip"),
             ),
           ),
         ],
@@ -28,7 +28,7 @@ class OnBoardingPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              const Spacer(),
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
@@ -47,25 +47,25 @@ class OnBoardingPage extends StatelessWidget {
                 "Enjoy our apps!",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              Spacer(),
+              const Spacer(),
               FilledButton.icon(
                 onPressed: () {
                   GoRouter.of(context).pushNamed("login");
                 },
                 iconAlignment: IconAlignment.end,
-                label: Text("Login to continue"),
-                icon: Icon(Icons.arrow_forward),
+                label: const Text("Login to continue"),
+                icon: const Icon(Icons.arrow_forward),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
+                  const Text("Don't have an account?"),
                   TextButton(
                     onPressed: () {
                       GoRouter.of(context).pushNamed("signup");
                     },
-                    child: Text(
+                    child: const Text(
                       "Create Account",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),

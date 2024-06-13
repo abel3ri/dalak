@@ -31,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              const Spacer(),
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
@@ -40,8 +40,8 @@ class _SplashPageState extends State<SplashPage> {
                   height: 96,
                 ),
               ),
-              Spacer(),
-              CircularProgressIndicator(),
+              const Spacer(),
+              const CircularProgressIndicator(),
             ],
           ),
         ),

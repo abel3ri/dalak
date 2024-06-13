@@ -12,7 +12,7 @@ class NoConnectionPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.wifi_off, size: 96),
+            const Icon(Icons.wifi_off, size: 96),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Text(
               "No Internet Connection",
@@ -30,7 +30,7 @@ class NoConnectionPage extends StatelessWidget {
                 onPressed: () {
                   GoRouter.of(context).pushReplacementNamed("splashPage");
                 },
-                child: Text("Try again"))
+                child: const Text("Try again"))
           ],
         ),
       ),

@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dalak/controllers/FormValidator.dart';
-import 'package:dalak/providers/LoginFormProvider.dart';
-import 'package:dalak/widgets/CustomAppBar.dart';
-import 'package:dalak/widgets/LoginSignupInput.dart';
+import 'package:dalak_app/controllers/FormValidator.dart';
+import 'package:dalak_app/providers/LoginFormProvider.dart';
+import 'package:dalak_app/widgets/CustomAppBar.dart';
+import 'package:dalak_app/widgets/LoginSignupInput.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
           onPressed: () {
             GoRouter.of(context).pop();
           },
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
         ),
       ),
       body: Padding(
@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
           horizontal: MediaQuery.of(context).size.width * 0.06,
         ),
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Form(
             key: loginProvider.formKey,
             child: Column(
@@ -94,11 +94,12 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 FilledButton(
-                  onPressed: () {
-                    if (loginProvider.formKey.currentState!.validate()) {}
+                  onPressed: () async {
+                    if (loginProvider.formKey.currentState!.validate()) {
+                      if (loginProvider.formKey.currentState!.validate()) {}
+                    }
                   },
-                  style: ButtonStyle(),
-                  child: Text("Login"),
+                  child: const Text("Login"),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
@@ -106,7 +107,7 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?"),
+                    const Text("Don't have an account?"),
                     TextButton(
                       onPressed: () {
                         GoRouter.of(context).pushReplacementNamed("signup");
