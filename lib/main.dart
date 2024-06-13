@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:dalak/providers/LoginFormProvider.dart';
+import 'package:dalak/providers/SignupFormProvider.dart';
 import 'package:dalak/utils/theme.dart';
 import 'package:dalak/router/router.dart';
 import 'package:dalak/providers/ThemeProvider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,8 +15,9 @@ void main(List<String> args) async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => ThemeProvider(prefs: prefs),
-        ),
+            create: (context) => ThemeProvider(prefs: prefs)),
+        ChangeNotifierProvider(create: (context) => LoginFormProvider()),
+        ChangeNotifierProvider(create: (context) => SignupFormProvider()),
       ],
       child: Builder(
         builder: (context) {
