@@ -1,6 +1,6 @@
 {
-    "name": "dalak",
-    "short_name": "dalak",
+    "name": "dalak_app",
+    "short_name": "dalak_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
