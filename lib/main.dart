@@ -16,20 +16,22 @@ void main(List<String> args) async {
           create: (context) => ThemeProvider(prefs: prefs),
         ),
       ],
-      child: Builder(builder: (context) {
-        final _selectedTheme = Provider.of<ThemeProvider>(context).theme;
-        return MaterialApp.router(
-          routerConfig: AppRouter.router,
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: _selectedTheme == 'system'
-              ? ThemeMode.system
-              : _selectedTheme == 'dark'
-                  ? ThemeMode.dark
-                  : ThemeMode.light,
-        );
-      }),
+      child: Builder(
+        builder: (context) {
+          final _selectedTheme = Provider.of<ThemeProvider>(context).theme;
+          return MaterialApp.router(
+            routerConfig: AppRouter.router,
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: _selectedTheme == 'system'
+                ? ThemeMode.system
+                : _selectedTheme == 'dark'
+                    ? ThemeMode.dark
+                    : ThemeMode.light,
+          );
+        },
+      ),
     ),
   );
 }
