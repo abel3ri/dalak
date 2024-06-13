@@ -1,20 +1,66 @@
-import 'package:dalak/pages/HomePage.dart';
-import 'package:dalak/pages/SplashPage.dart';
+import 'package:dalak_app/pages/NoConnectionPage.dart';
+import 'package:dalak_app/pages/OnBoardingPage.dart';
+import 'package:dalak_app/pages/SignupPage.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:dalak_app/pages/HomePage.dart';
+import 'package:dalak_app/pages/LoginPage.dart';
+import 'package:dalak_app/pages/SplashPage.dart';
+import 'package:dalak_app/utils/SlideTransition.dart';
 
 class AppRouter {
   static final router = GoRouter(
     routes: [
       GoRoute(
         path: "/",
-        name: 'homePage',
-        builder: (context, state) => HomePage(),
+        name: 'splashPage',
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const SplashPage(),
+        ),
       ),
       GoRoute(
-        path: "/splash",
-        name: 'splashPage',
-        builder: (context, state) => SplashPage(),
-      )
+        path: "/home",
+        name: 'homePage',
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const HomePage(),
+        ),
+      ),
+      GoRoute(
+        path: "/login",
+        name: "login",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          rtl: false,
+          child: const LoginPage(),
+        ),
+      ),
+      GoRoute(
+        path: "/signup",
+        name: "signup",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          rtl: false,
+          child: const SignupPage(),
+        ),
+      ),
+      GoRoute(
+        path: "/on-boarding",
+        name: "onBoarding",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const OnBoardingPage(),
+        ),
+      ),
+      GoRoute(
+        path: "/no-connection",
+        name: "noConnection",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const NoConnectionPage(),
+        ),
+      ),
     ],
   );
 }
