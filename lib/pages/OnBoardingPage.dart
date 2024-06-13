@@ -62,7 +62,9 @@ class OnBoardingPage extends StatelessWidget {
                 children: [
                   Text("Don't have an account?"),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).pushNamed("signup");
+                    },
                     child: Text(
                       "Create Account",
                       style: TextStyle(fontWeight: FontWeight.bold),
