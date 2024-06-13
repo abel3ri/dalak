@@ -1,70 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    InternetConnectionChecker().hasConnection.then((value) {
+      if (value == true) {
+        GoRouter.of(context).pushReplacementNamed("onBoarding");
+      } else {
+        GoRouter.of(context).pushReplacementNamed("noConnection");
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: Colors.transparent,
-        elevation: 0,
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text("Skip"),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.06,
-            vertical: MediaQuery.of(context).size.height * 0.02,
-          ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Spacer(),
               ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
                   "assets/images/logo.jpg",
-                  width: 120,
-                  height: 120,
+                  width: 96,
+                  height: 96,
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-              Text(
-                "Welcome to Dalak",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              Text(
-                "Enjoy our apps!",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
               Spacer(),
-              FilledButton.icon(
-                onPressed: () {},
-                iconAlignment: IconAlignment.end,
-                label: Text("Login to continue"),
-                icon: Icon(Icons.arrow_forward),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account?"),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Create Account",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
+              CircularProgressIndicator(),
             ],
           ),
         ),
