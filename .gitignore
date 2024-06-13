@@ -16,6 +16,10 @@ migrate_working_dir/
 *.iws
 .idea/
 
+#firebase related
+/lib/firebase_options.dart
+firebase.json
+
 # Visual Studio Code related
 .vscode/
 

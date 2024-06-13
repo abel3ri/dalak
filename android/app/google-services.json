@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395040497691",
+    "project_id": "dalak-52363",
+    "storage_bucket": "dalak-52363.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395040497691:android:e979676041dab82c7ed8be",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqC76qy4ql1r6yyrg4Fy89qYIgL-mMPnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
