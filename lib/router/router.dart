@@ -1,5 +1,6 @@
 import 'package:dalak/pages/NoConnectionPage.dart';
 import 'package:dalak/pages/OnBoardingPage.dart';
+import 'package:dalak/pages/SignupPage.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:dalak/pages/HomePage.dart';
@@ -33,6 +34,15 @@ class AppRouter {
           key: state.pageKey,
           rtl: false,
           child: LoginPage(),
+        ),
+      ),
+      GoRoute(
+        path: "/signup",
+        name: "signup",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          rtl: false,
+          child: SignupPage(),
         ),
       ),
       GoRoute(
