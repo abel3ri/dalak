@@ -39,6 +39,7 @@ class FormInputField extends StatelessWidget {
         ),
         SizedBox(height: 8),
         TextFormField(
+          controller: controller,
           keyboardType: keyBoardType,
           obscureText: obscureText,
           textInputAction: textInputAction,
@@ -47,9 +48,9 @@ class FormInputField extends StatelessWidget {
             hintText: hintText,
             hintStyle: Theme.of(context).textTheme.bodyMedium,
             suffixIcon: labelText == 'Password'
-                ? GestureDetector(
-                    onTap: onSuffixIconTap,
-                    child: Icon(sufficIcon),
+                ? IconButton(
+                    onPressed: onSuffixIconTap,
+                    icon: Icon(sufficIcon),
                   )
                 : null,
             focusedBorder: OutlineInputBorder(
