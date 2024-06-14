@@ -1,13 +1,28 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dalak_app/controllers/FormValidator.dart';
-import 'package:dalak_app/providers/LoginFormProvider.dart';
-import 'package:dalak_app/widgets/CustomAppBar.dart';
-import 'package:dalak_app/widgets/LoginSignupInput.dart';
+import 'package:dalak_blog_app/controllers/FormValidator.dart';
+import 'package:dalak_blog_app/providers/LoginFormProvider.dart';
+import 'package:dalak_blog_app/widgets/CustomAppBar.dart';
+import 'package:dalak_blog_app/widgets/LoginSignupInput.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _emailUsernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailUsernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +67,7 @@ class LoginPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 FormInputField(
-                  controller: loginProvider.usernameEmailController,
+                  controller: _emailUsernameController,
                   labelText: "Username or Email",
                   hintText: "Enter your username or email",
                   prefixIcon: Icons.person,
@@ -64,7 +79,7 @@ class LoginPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 FormInputField(
-                  controller: loginProvider.passwordController,
+                  controller: _passwordController,
                   labelText: "Password",
                   hintText: "Enter your password",
                   prefixIcon: Icons.lock,
@@ -95,9 +110,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 FilledButton(
                   onPressed: () async {
-                    if (loginProvider.formKey.currentState!.validate()) {
-                      if (loginProvider.formKey.currentState!.validate()) {}
-                    }
+                    if (loginProvider.formKey.currentState!.validate()) {}
                   },
                   child: const Text("Login"),
                 ),
