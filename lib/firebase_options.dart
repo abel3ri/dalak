@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCAKpxZT28Qgg54bTMJBju2DKt_5mQ82aU',
-    appId: '1:663394555864:android:a4566d62bd5e4d0f0844ad',
-    messagingSenderId: '663394555864',
-    projectId: 'dalak-blog-app-ab9ea',
-    storageBucket: 'dalak-blog-app-ab9ea.appspot.com',
+    apiKey: 'AIzaSyAYxR0ww2ZKJg2bYECUAzVtb8bu11IW7XU',
+    appId: '1:155560386671:android:33bb339884448512f82d9a',
+    messagingSenderId: '155560386671',
+    projectId: 'dalak-blog-app-d58a1',
+    storageBucket: 'dalak-blog-app-d58a1.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBxnBbjmn74wKK9dnMz-0i--8-BugkULlo',
-    appId: '1:663394555864:ios:36305f3602a56ea50844ad',
-    messagingSenderId: '663394555864',
-    projectId: 'dalak-blog-app-ab9ea',
-    storageBucket: 'dalak-blog-app-ab9ea.appspot.com',
-    iosBundleId: 'com.example.dalakApp',
+    apiKey: 'AIzaSyAAhjO31AqFO8NEATAq-LPZ1YotPQPDD3w',
+    appId: '1:155560386671:ios:eb00ba0eb223f55df82d9a',
+    messagingSenderId: '155560386671',
+    projectId: 'dalak-blog-app-d58a1',
+    storageBucket: 'dalak-blog-app-d58a1.appspot.com',
+    iosBundleId: 'com.example.dalakBlogApp',
   );
+
 }
