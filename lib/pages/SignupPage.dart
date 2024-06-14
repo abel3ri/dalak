@@ -100,7 +100,7 @@ class _SignupPageState extends State<SignupPage> {
                   hintText: "Enter your password",
                   prefixIcon: Icons.lock,
                   keyBoardType: TextInputType.visiblePassword,
-                  obscureText: signupProvider.showPassword,
+                  obscureText: !signupProvider.showPassword,
                   sufficIcon: signupProvider.showPassword
                       ? Icons.visibility_off
                       : Icons.visibility,

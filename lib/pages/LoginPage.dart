@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                       ? Icons.visibility_off
                       : Icons.visibility,
                   keyBoardType: TextInputType.visiblePassword,
-                  obscureText: loginProvider.showPassword,
+                  obscureText: !loginProvider.showPassword,
                   onSuffixIconTap: loginProvider.toggleShowPassword,
                   textInputAction: TextInputAction.done,
                   validator: FormValidator.passwordValidator,
