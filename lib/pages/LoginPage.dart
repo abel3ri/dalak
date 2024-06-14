@@ -122,6 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                         l.showError(context);
                       }, (r) {
                         r.showSuccess(context);
+                        GoRouter.of(context).pushReplacementNamed("homePage");
                       });
                     }
                   },
