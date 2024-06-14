@@ -1,3 +1,4 @@
+import 'package:dalak_blog_app/controllers/AuthController.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   prefixIcon: Icons.person,
                   keyBoardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
-                  validator: FormValidator.emailValidator,
+                  validator: FormValidator.usernameValidator,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.02,
@@ -110,9 +111,29 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 FilledButton(
                   onPressed: () async {
-                    if (loginProvider.formKey.currentState!.validate()) {}
+                    if (loginProvider.formKey.currentState!.validate()) {
+                      loginProvider.toggleIsLoading();
+                      final res = await AuthController.loginUser(
+                        emailUsername: _emailUsernameController.text,
+                        password: _passwordController.text,
+                      );
+                      loginProvider.toggleIsLoading();
+                      res.fold((l) {
+                        l.showError(context);
+                      }, (r) {
+                        r.showSuccess(context);
+                      });
+                    }
                   },
-                  child: const Text("Login"),
+                  child: loginProvider.isLoading
+                      ? SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Text("Login"),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,

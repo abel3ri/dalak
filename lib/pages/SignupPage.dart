@@ -114,18 +114,26 @@ class _SignupPageState extends State<SignupPage> {
                 FilledButton(
                   onPressed: () async {
                     if (signupProvider.formKey.currentState!.validate()) {
+                      signupProvider.toggleIsLoading();
                       final res = await AuthController.signupUser(
                         username: _usernameController.text,
                         email: _emailController.text,
                         password: _passwordController.text,
                       );
-
+                      signupProvider.toggleIsLoading();
                       res.fold((l) => {l.showError(context)},
                           (r) => {r.showSuccess(context)});
                     }
                   },
-                  style: const ButtonStyle(),
-                  child: const Text("Create account"),
+                  child: signupProvider.isLoading
+                      ? SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Text("Create account"),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
