@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "663394555864",
-    "project_id": "dalak-blog-app-ab9ea",
-    "storage_bucket": "dalak-blog-app-ab9ea.appspot.com"
+    "project_number": "155560386671",
+    "project_id": "dalak-blog-app-d58a1",
+    "storage_bucket": "dalak-blog-app-d58a1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:663394555864:android:a4566d62bd5e4d0f0844ad",
+        "mobilesdk_app_id": "1:155560386671:android:33bb339884448512f82d9a",
         "android_client_info": {
-          "package_name": "com.example.dalak_app"
+          "package_name": "com.example.dalak_blog_app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCAKpxZT28Qgg54bTMJBju2DKt_5mQ82aU"
+          "current_key": "AIzaSyAYxR0ww2ZKJg2bYECUAzVtb8bu11IW7XU"
         }
       ],
       "services": {

@@ -1,4 +1,4 @@
-# dalak_app
+# dalak_blog_app
 
 A new Flutter project.
 

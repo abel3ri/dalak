@@ -1,9 +1,10 @@
+import 'package:dalak_blog_app/utils/constants.dart';
+
 class FormValidator {
   static String? emailValidator(String? value) {
-    final regex = RegExp(r"^[A-Za-z0-9.+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
-
     if (value!.isEmpty) return "Please provide an email address";
-    if (!regex.hasMatch(value)) return "Please enter a valid email address";
+    if (!emailRegex.hasMatch(value))
+      return "Please enter a valid email address";
     return null;
   }
 

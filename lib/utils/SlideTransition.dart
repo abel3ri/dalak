@@ -3,14 +3,12 @@ import 'package:go_router/go_router.dart';
 
 class SlideTransitionPage extends CustomTransitionPage {
   SlideTransitionPage({
-    required LocalKey key,
-    required Widget child,
+    required LocalKey super.key,
+    required super.child,
     bool rtl = true,
-    Duration duration = const Duration(milliseconds: 400),
+    Duration duration = const Duration(milliseconds: 500),
     Curve curve = Curves.easeInOut,
   }) : super(
-          key: key,
-          child: child,
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             final curvedAnimation = CurvedAnimation(
               parent: animation,

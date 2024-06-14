@@ -1,4 +1,4 @@
-import 'package:dalak_app/widgets/CustomAppBar.dart';
+import 'package:dalak_blog_app/widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
