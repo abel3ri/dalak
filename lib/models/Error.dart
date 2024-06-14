@@ -10,7 +10,7 @@ class ErrorMessage {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text("Hello"),
+        content: Text(body),
         duration: Duration(seconds: 3),
         action: SnackBarAction(
           textColor: Colors.white,
