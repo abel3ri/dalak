@@ -6,10 +6,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final List<Widget>? actions;
   final Widget? leading;
+  final PreferredSizeWidget? bottom;
   CustomAppBar({
     this.title,
     this.actions,
     this.leading,
+    this.bottom,
   });
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title ?? ""),
       actions: actions,
       leading: leading,
+      bottom: bottom,
     );
   }
 
