@@ -14,12 +14,18 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    ContentController.fetchData("categories").then((res) {
+    ContentController.fetchData(
+      endpoint: "categories",
+    ).then((res) {
       res.fold((l) {
+        print(l.body);
         GoRouter.of(context).pushReplacementNamed("noConnection");
       }, (r) {
+        final categories = r.map((category) {
+          return {"id": category['id'], "name": category['name']};
+        }).toList();
         Provider.of<ContentProvider>(context, listen: false)
-            .populateCategories(r);
+            .populateCategories(categories);
         GoRouter.of(context).pushReplacementNamed("onBoarding");
       });
     });
