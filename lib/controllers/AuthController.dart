@@ -2,7 +2,6 @@ import 'package:dalak_blog_app/models/Error.dart';
 import 'package:dalak_blog_app/models/Success.dart';
 import 'package:dalak_blog_app/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fpdart/fpdart.dart';
 
 class AuthController {
