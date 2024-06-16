@@ -10,6 +10,8 @@ class ContentProvider with ChangeNotifier {
   List<Map<String, dynamic>> _categories = [];
   bool _isLoading = false;
   int _currentCategoryID = 0;
+  late Map<String, dynamic> _post;
+  late String _categoryName;
 
   void populatePosts(List<Map<String, dynamic>> posts) {
     _posts = posts;
@@ -31,6 +33,15 @@ class ContentProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setPost(Map<String, dynamic> post) {
+    _post = post;
+    notifyListeners();
+  }
+
+  void setCategoryName(String categoryName) {
+    _categoryName = categoryName;
+  }
+
   Future<Either<ErrorMessage, SuccessMessage>> fetchPosts({
     required String endpoint,
   }) async {
@@ -50,4 +61,6 @@ class ContentProvider with ChangeNotifier {
   List<Map<String, dynamic>> get categories => _categories;
   bool get isLoading => _isLoading;
   int get currentCategoryID => _currentCategoryID;
+  Map<String, dynamic> get post => _post;
+  String get categoryName => _categoryName;
 }

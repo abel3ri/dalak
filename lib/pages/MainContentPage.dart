@@ -1,13 +1,14 @@
 import 'package:dalak_blog_app/providers/ContentProvider.dart';
+import 'package:dalak_blog_app/widgets/MainShimmerLoading.dart';
 import 'package:dalak_blog_app/widgets/home/ArticleContainerXL.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MainContent extends StatelessWidget {
+class MainContentPage extends StatelessWidget {
   final String categoryName;
   final int categoryID;
-  MainContent({
+  MainContentPage({
     required this.categoryName,
     required this.categoryID,
     super.key,
@@ -23,22 +24,29 @@ class MainContent extends StatelessWidget {
           : Theme.of(context).scaffoldBackgroundColor.darken(5),
       body: RefreshIndicator(
         onRefresh: () async {
+          contentProvider.toggleIsLoading();
           await contentProvider.fetchPosts(
             endpoint: "posts?categories=${categoryID}&_embed",
           );
+          contentProvider.toggleIsLoading();
         },
-        child: ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          itemBuilder: (context, index) {
-            return ArticleContainerXL(index: index, categoryName: categoryName);
-          },
-          separatorBuilder: (context, index) {
-            return SizedBox(
-              height: 8,
-            );
-          },
-          itemCount: contentProvider.posts.length,
-        ),
+        child: contentProvider.isLoading
+            ? MainShimmerLoading()
+            : ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                itemBuilder: (context, index) {
+                  return ArticleContainerXL(
+                    index: index,
+                    categoryName: categoryName,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    height: 8,
+                  );
+                },
+                itemCount: contentProvider.posts.length,
+              ),
       ),
     );
   }
