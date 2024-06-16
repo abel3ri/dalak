@@ -1,12 +1,12 @@
 import 'package:dalak_blog_app/providers/ContentProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ArticleContainerXL extends StatelessWidget {
   final int index;
-
   final String categoryName;
   const ArticleContainerXL(
       {super.key, required this.index, required this.categoryName});
@@ -15,7 +15,11 @@ class ArticleContainerXL extends StatelessWidget {
   Widget build(BuildContext context) {
     final contentProvider = Provider.of<ContentProvider>(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        contentProvider.setPost(contentProvider.posts[index]);
+        contentProvider.setCategoryName(categoryName);
+        GoRouter.of(context).pushNamed("articleDetails");
+      },
       child: Container(
         padding: EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
@@ -30,10 +34,13 @@ class ArticleContainerXL extends StatelessWidget {
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
               ),
-              child: Image.network(
-                contentProvider.posts[index]['_embedded']['wp:featuredmedia']
-                    .first['link'],
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: contentProvider.posts[index]['id'],
+                child: Image.network(
+                  contentProvider.posts[index]['_embedded']['wp:featuredmedia']
+                      .first['link'],
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             SizedBox(height: 8),
