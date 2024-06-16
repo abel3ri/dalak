@@ -1,6 +1,6 @@
 import 'package:dalak_blog_app/models/Error.dart';
 import 'package:dalak_blog_app/models/Success.dart';
-import 'package:dalak_blog_app/pages/MainContent.dart';
+import 'package:dalak_blog_app/pages/MainContentPage.dart';
 import 'package:dalak_blog_app/providers/ContentProvider.dart';
 import 'package:dalak_blog_app/widgets/MainShimmerLoading.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +92,7 @@ class _TabContentState extends State<TabContent> {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
         if (snapshot.hasData) {
-          return MainContent(
+          return MainContentPage(
             categoryName: widget.categoryName,
             categoryID: widget.categoryId,
           );

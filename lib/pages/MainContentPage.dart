@@ -4,10 +4,10 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MainContent extends StatelessWidget {
+class MainContentPage extends StatelessWidget {
   final String categoryName;
   final int categoryID;
-  MainContent({
+  MainContentPage({
     required this.categoryName,
     required this.categoryID,
     super.key,
