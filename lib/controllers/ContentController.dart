@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 
 class ContentController {
-  static Future<Either<ErrorMessage, List<Map<String, dynamic>>>> fetchData(
-      String endpoint) async {
+  static Future<Either<ErrorMessage, List<Map<String, dynamic>>>> fetchData({
+    required String endpoint,
+  }) async {
     try {
       final res = await dio.get('${BASE_URL}/${endpoint}');
-      print(res);
       return right(List<Map<String, dynamic>>.from(res.data));
     } on DioException catch (_) {
       return left(ErrorMessage(body: "Error fetching content."));
