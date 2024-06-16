@@ -1,4 +1,5 @@
 import 'package:dalak_blog_app/firebase_options.dart';
+import 'package:dalak_blog_app/providers/ContentProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,7 @@ void main(List<String> args) async {
             create: (context) => ThemeProvider(prefs: prefs)),
         ChangeNotifierProvider(create: (context) => LoginFormProvider()),
         ChangeNotifierProvider(create: (context) => SignupFormProvider()),
+        ChangeNotifierProvider(create: (context) => ContentProvider()),
       ],
       child: Builder(
         builder: (context) {

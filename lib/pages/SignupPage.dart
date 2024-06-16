@@ -121,8 +121,10 @@ class _SignupPageState extends State<SignupPage> {
                         password: _passwordController.text,
                       );
                       signupProvider.toggleIsLoading();
-                      res.fold((l) => {l.showError(context)},
-                          (r) => {r.showSuccess(context)});
+
+                      res.fold((l) => {l.showError(context)}, (r) {
+                        GoRouter.of(context).pushReplacementNamed("homePage");
+                      });
                     }
                   },
                   child: signupProvider.isLoading

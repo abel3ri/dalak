@@ -13,7 +13,9 @@ class OnBoardingPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).pushReplacementNamed("homePage");
+              },
               child: const Text("Skip"),
             ),
           ),
