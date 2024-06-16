@@ -123,7 +123,6 @@ class _SignupPageState extends State<SignupPage> {
                       signupProvider.toggleIsLoading();
 
                       res.fold((l) => {l.showError(context)}, (r) {
-                        r.showSuccess(context);
                         GoRouter.of(context).pushReplacementNamed("homePage");
                       });
                     }
