@@ -42,7 +42,7 @@ class MainContentPage extends StatelessWidget {
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(
-                    height: 8,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   );
                 },
                 itemCount: contentProvider.posts.length,

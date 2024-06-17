@@ -1,5 +1,6 @@
 import 'package:dalak_blog_app/providers/ContentProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -35,13 +36,17 @@ class ArticleContainerXL extends StatelessWidget {
                 topRight: Radius.circular(8),
               ),
               child: Hero(
-                tag: contentProvider.posts[index]['id'],
-                child: Image.network(
-                  contentProvider.posts[index]['_embedded']['wp:featuredmedia']
-                      .first['link'],
-                  fit: BoxFit.cover,
-                ),
-              ),
+                      tag: contentProvider.posts[index]['id'],
+                      child: Image.network(
+                        contentProvider
+                            .posts[index]['_embedded']['wp:featuredmedia']
+                            .first['link'],
+                        fit: BoxFit.cover,
+                      )).animate().fadeIn(
+                    duration: Duration(
+                      milliseconds: 300,
+                    ),
+                  ),
             ),
             SizedBox(height: 8),
             Padding(
