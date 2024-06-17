@@ -9,7 +9,6 @@ class ContentProvider with ChangeNotifier {
   List<Map<String, dynamic>> _posts = [];
   List<Map<String, dynamic>> _categories = [];
   bool _isLoading = false;
-  int _currentCategoryID = 0;
   late Map<String, dynamic> _post;
   late String _categoryName;
 
@@ -20,11 +19,6 @@ class ContentProvider with ChangeNotifier {
 
   void populateCategories(List<Map<String, dynamic>> categories) {
     _categories = categories;
-    notifyListeners();
-  }
-
-  void updateCategoryID(int id) {
-    _currentCategoryID = id;
     notifyListeners();
   }
 
@@ -46,7 +40,7 @@ class ContentProvider with ChangeNotifier {
     required String endpoint,
   }) async {
     try {
-      final res = await dio.get('${BASE_URL}/${endpoint}');
+      final res = await dio.get("${BASE_URL}/${endpoint}");
       _posts = List<Map<String, dynamic>>.from(res.data);
       notifyListeners();
       return right(SuccessMessage(body: "Successfully loaded content"));
@@ -60,7 +54,6 @@ class ContentProvider with ChangeNotifier {
   List<Map<String, dynamic>> get posts => _posts;
   List<Map<String, dynamic>> get categories => _categories;
   bool get isLoading => _isLoading;
-  int get currentCategoryID => _currentCategoryID;
   Map<String, dynamic> get post => _post;
   String get categoryName => _categoryName;
 }
