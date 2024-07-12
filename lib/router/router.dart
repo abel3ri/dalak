@@ -1,4 +1,5 @@
 import 'package:dalak_blog_app/pages/ArticleDetailsPage.dart';
+import 'package:dalak_blog_app/pages/CheckAuthChangePage.dart';
 import 'package:dalak_blog_app/pages/CommentsPage.dart';
 import 'package:dalak_blog_app/pages/NoConnectionPage.dart';
 import 'package:dalak_blog_app/pages/OnBoardingPage.dart';
@@ -78,6 +79,15 @@ class AppRouter {
           key: state.pageKey,
           rtl: false,
           child: const CommentsPage(),
+        ),
+      ),
+      GoRoute(
+        path: "/check-auth-change",
+        name: "checkAuthChangePage",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          rtl: false,
+          child: const CheckAuthCangePage(),
         ),
       ),
     ],

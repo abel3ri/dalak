@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
         }).toList();
         Provider.of<ContentProvider>(context, listen: false)
             .populateCategories(categories);
-        GoRouter.of(context).pushReplacementNamed("onBoarding");
+        GoRouter.of(context).pushReplacementNamed("checkAuthChangePage");
       });
     });
     super.initState();
