@@ -115,10 +115,11 @@ class _SignupPageState extends State<SignupPage> {
                   onPressed: () async {
                     if (signupProvider.formKey.currentState!.validate()) {
                       signupProvider.toggleIsLoading();
+                      FocusScope.of(context).unfocus();
                       final res = await AuthController.signupUser(
-                        username: _usernameController.text,
-                        email: _emailController.text,
-                        password: _passwordController.text,
+                        username: _usernameController.text.trim(),
+                        email: _emailController.text.trim(),
+                        password: _passwordController.text.trim(),
                       );
                       signupProvider.toggleIsLoading();
 

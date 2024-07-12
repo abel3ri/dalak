@@ -113,9 +113,10 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                     if (loginProvider.formKey.currentState!.validate()) {
                       loginProvider.toggleIsLoading();
+                      FocusScope.of(context).unfocus();
                       final res = await AuthController.loginUser(
-                        emailUsername: _emailUsernameController.text,
-                        password: _passwordController.text,
+                        emailUsername: _emailUsernameController.text.trim(),
+                        password: _passwordController.text.trim(),
                       );
                       loginProvider.toggleIsLoading();
                       res.fold((l) {

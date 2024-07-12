@@ -17,6 +17,7 @@ class FormValidator {
   static String? usernameValidator(String? value) {
     if (value!.isEmpty) return "Please provide a username";
     if (value.length < 5) return "Username must be at least 5 chars long";
+    if (value.contains(" ")) return "Please enter a valid username";
     return null;
   }
 }
