@@ -1,6 +1,8 @@
+import 'package:dalak_blog_app/controllers/ContentController.dart';
+import 'package:dalak_blog_app/providers/ContentProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -12,12 +14,20 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    InternetConnectionChecker().hasConnection.then((value) {
-      if (value == true) {
-        GoRouter.of(context).pushReplacementNamed("onBoarding");
-      } else {
+    ContentController.fetchData(
+      endpoint: "categories",
+    ).then((res) {
+      res.fold((l) {
+        print(l.body);
         GoRouter.of(context).pushReplacementNamed("noConnection");
-      }
+      }, (r) {
+        final categories = r.map((category) {
+          return {"id": category['id'], "name": category['name']};
+        }).toList();
+        Provider.of<ContentProvider>(context, listen: false)
+            .populateCategories(categories);
+        GoRouter.of(context).pushReplacementNamed("onBoarding");
+      });
     });
     super.initState();
   }

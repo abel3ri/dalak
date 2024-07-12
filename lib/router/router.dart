@@ -1,12 +1,14 @@
-import 'package:dalak_app/pages/NoConnectionPage.dart';
-import 'package:dalak_app/pages/OnBoardingPage.dart';
-import 'package:dalak_app/pages/SignupPage.dart';
+import 'package:dalak_blog_app/pages/ArticleDetailsPage.dart';
+import 'package:dalak_blog_app/pages/CommentsPage.dart';
+import 'package:dalak_blog_app/pages/NoConnectionPage.dart';
+import 'package:dalak_blog_app/pages/OnBoardingPage.dart';
+import 'package:dalak_blog_app/pages/SignupPage.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:dalak_app/pages/HomePage.dart';
-import 'package:dalak_app/pages/LoginPage.dart';
-import 'package:dalak_app/pages/SplashPage.dart';
-import 'package:dalak_app/utils/SlideTransition.dart';
+import 'package:dalak_blog_app/pages/HomePage.dart';
+import 'package:dalak_blog_app/pages/LoginPage.dart';
+import 'package:dalak_blog_app/pages/SplashPage.dart';
+import 'package:dalak_blog_app/utils/SlideTransition.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -59,6 +61,23 @@ class AppRouter {
         pageBuilder: (context, state) => SlideTransitionPage(
           key: state.pageKey,
           child: const NoConnectionPage(),
+        ),
+      ),
+      GoRoute(
+        path: "/article-details",
+        name: "articleDetails",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const ArticlesDetailPage(),
+        ),
+      ),
+      GoRoute(
+        path: "/comments",
+        name: "comments",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          rtl: false,
+          child: const CommentsPage(),
         ),
       ),
     ],

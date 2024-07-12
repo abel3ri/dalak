@@ -1,4 +1,4 @@
-import 'package:dalak_app/widgets/CustomAppBar.dart';
+import 'package:dalak_blog_app/widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,7 +13,9 @@ class OnBoardingPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).pushReplacementNamed("homePage");
+              },
               child: const Text("Skip"),
             ),
           ),

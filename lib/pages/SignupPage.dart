@@ -1,15 +1,32 @@
-import 'package:dalak_app/utils/constants.dart';
+import 'package:dalak_blog_app/controllers/AuthController.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'package:dalak_app/controllers/FormValidator.dart';
-import 'package:dalak_app/providers/SignupFormProvider.dart';
-import 'package:dalak_app/widgets/CustomAppBar.dart';
-import 'package:dalak_app/widgets/LoginSignupInput.dart';
+import 'package:dalak_blog_app/controllers/FormValidator.dart';
+import 'package:dalak_blog_app/providers/SignupFormProvider.dart';
+import 'package:dalak_blog_app/widgets/CustomAppBar.dart';
+import 'package:dalak_blog_app/widgets/LoginSignupInput.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +71,7 @@ class SignupPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 FormInputField(
-                  controller: signupProvider.usernameController,
+                  controller: _usernameController,
                   labelText: "Username",
                   hintText: "Enter your username",
                   prefixIcon: Icons.person,
@@ -66,7 +83,7 @@ class SignupPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 FormInputField(
-                  controller: signupProvider.emailController,
+                  controller: _emailController,
                   labelText: "Email",
                   hintText: "Enter your E-mail",
                   prefixIcon: Icons.email,
@@ -78,12 +95,12 @@ class SignupPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 FormInputField(
-                  controller: signupProvider.passwordController,
+                  controller: _passwordController,
                   labelText: "Password",
                   hintText: "Enter your password",
                   prefixIcon: Icons.lock,
                   keyBoardType: TextInputType.visiblePassword,
-                  obscureText: signupProvider.showPassword,
+                  obscureText: !signupProvider.showPassword,
                   sufficIcon: signupProvider.showPassword
                       ? Icons.visibility_off
                       : Icons.visibility,
@@ -97,18 +114,29 @@ class SignupPage extends StatelessWidget {
                 FilledButton(
                   onPressed: () async {
                     if (signupProvider.formKey.currentState!.validate()) {
-                      try {
-                        await auth.signInWithEmailAndPassword(
-                          email: signupProvider.emailController.text,
-                          password: signupProvider.passwordController.text,
-                        );
-                      } catch (err) {
-                        print(err);
-                      }
+                      signupProvider.toggleIsLoading();
+                      FocusScope.of(context).unfocus();
+                      final res = await AuthController.signupUser(
+                        username: _usernameController.text.trim(),
+                        email: _emailController.text.trim(),
+                        password: _passwordController.text.trim(),
+                      );
+                      signupProvider.toggleIsLoading();
+
+                      res.fold((l) => {l.showError(context)}, (r) {
+                        GoRouter.of(context).pushReplacementNamed("homePage");
+                      });
                     }
                   },
-                  style: const ButtonStyle(),
-                  child: const Text("Create account"),
+                  child: signupProvider.isLoading
+                      ? SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Text("Create account"),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,

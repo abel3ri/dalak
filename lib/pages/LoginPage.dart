@@ -1,13 +1,29 @@
+import 'package:dalak_blog_app/controllers/AuthController.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dalak_app/controllers/FormValidator.dart';
-import 'package:dalak_app/providers/LoginFormProvider.dart';
-import 'package:dalak_app/widgets/CustomAppBar.dart';
-import 'package:dalak_app/widgets/LoginSignupInput.dart';
+import 'package:dalak_blog_app/controllers/FormValidator.dart';
+import 'package:dalak_blog_app/providers/LoginFormProvider.dart';
+import 'package:dalak_blog_app/widgets/CustomAppBar.dart';
+import 'package:dalak_blog_app/widgets/LoginSignupInput.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _emailUsernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailUsernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,19 +68,19 @@ class LoginPage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 FormInputField(
-                  controller: loginProvider.usernameEmailController,
+                  controller: _emailUsernameController,
                   labelText: "Username or Email",
                   hintText: "Enter your username or email",
                   prefixIcon: Icons.person,
                   keyBoardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
-                  validator: FormValidator.emailValidator,
+                  validator: FormValidator.usernameValidator,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 FormInputField(
-                  controller: loginProvider.passwordController,
+                  controller: _passwordController,
                   labelText: "Password",
                   hintText: "Enter your password",
                   prefixIcon: Icons.lock,
@@ -72,7 +88,7 @@ class LoginPage extends StatelessWidget {
                       ? Icons.visibility_off
                       : Icons.visibility,
                   keyBoardType: TextInputType.visiblePassword,
-                  obscureText: loginProvider.showPassword,
+                  obscureText: !loginProvider.showPassword,
                   onSuffixIconTap: loginProvider.toggleShowPassword,
                   textInputAction: TextInputAction.done,
                   validator: FormValidator.passwordValidator,
@@ -96,10 +112,29 @@ class LoginPage extends StatelessWidget {
                 FilledButton(
                   onPressed: () async {
                     if (loginProvider.formKey.currentState!.validate()) {
-                      if (loginProvider.formKey.currentState!.validate()) {}
+                      loginProvider.toggleIsLoading();
+                      FocusScope.of(context).unfocus();
+                      final res = await AuthController.loginUser(
+                        emailUsername: _emailUsernameController.text.trim(),
+                        password: _passwordController.text.trim(),
+                      );
+                      loginProvider.toggleIsLoading();
+                      res.fold((l) {
+                        l.showError(context);
+                      }, (r) {
+                        GoRouter.of(context).pushReplacementNamed("homePage");
+                      });
                     }
                   },
-                  child: const Text("Login"),
+                  child: loginProvider.isLoading
+                      ? SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Text("Login"),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
