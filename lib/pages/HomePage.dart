@@ -1,15 +1,69 @@
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:dalak_blog_app/models/Error.dart';
 import 'package:dalak_blog_app/models/Success.dart';
+import 'package:dalak_blog_app/pages/FavoriteArticlesPage.dart';
 import 'package:dalak_blog_app/pages/MainContentPage.dart';
+import 'package:dalak_blog_app/pages/SearchArticlesPage.dart';
+import 'package:dalak_blog_app/pages/SettingsPage.dart';
+import 'package:dalak_blog_app/pages/VideoArticlesPage.dart';
+import 'package:dalak_blog_app/providers/BottomNavBarProvider.dart';
 import 'package:dalak_blog_app/providers/ContentProvider.dart';
 import 'package:dalak_blog_app/widgets/MainShimmerLoading.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fpdart/fpdart.dart' hide State;
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    print("built");
+    final bottomNavBarProvider = Provider.of<BottomNavBarProvider>(context);
+   
+    return Scaffold(
+      body: IndexedStack(
+        index: bottomNavBarProvider.selectedIndex,
+        children: [
+          HomeScreen(),
+          VideoArticlesPage(),
+          SearchArticlesPage(),
+          FavoriteArticlesPage(),
+          SettingsPage(),
+        ],
+      ),
+      bottomNavigationBar: CustomNavigationBar(
+        selectedColor: Theme.of(context).colorScheme.primary,
+        strokeColor: Theme.of(context).colorScheme.primary,
+        currentIndex: bottomNavBarProvider.selectedIndex,
+        onTap: (index) {
+          bottomNavBarProvider.updateSelectedIndex(index);
+        },
+        items: [
+          CustomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.house),
+          ),
+          CustomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.youtube),
+          ),
+          CustomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
+          ),
+          CustomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.heart),
+          ),
+          CustomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.user),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final contentProvider =
@@ -19,14 +73,19 @@ class HomePage extends StatelessWidget {
       length: contentProvider.categories.length,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Dalak"),
+          title: Text(
+            "Home",
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
           leading: IconButton(
             onPressed: () {},
             icon: Icon(Icons.menu),
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).pushNamed("search");
+              },
               icon: Icon(Icons.search),
             ),
             IconButton(
