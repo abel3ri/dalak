@@ -3,6 +3,7 @@ import 'package:dalak_blog_app/pages/CheckAuthChangePage.dart';
 import 'package:dalak_blog_app/pages/CommentsPage.dart';
 import 'package:dalak_blog_app/pages/NoConnectionPage.dart';
 import 'package:dalak_blog_app/pages/OnBoardingPage.dart';
+import 'package:dalak_blog_app/pages/SearchArticlesPage.dart';
 import 'package:dalak_blog_app/pages/SignupPage.dart';
 import 'package:go_router/go_router.dart';
 
@@ -88,6 +89,15 @@ class AppRouter {
           key: state.pageKey,
           rtl: false,
           child: const CheckAuthCangePage(),
+        ),
+      ),
+      GoRoute(
+        path: "/search",
+        name: "search",
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          rtl: false,
+          child: SearchArticlesPage(),
         ),
       ),
     ],
