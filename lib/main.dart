@@ -1,6 +1,6 @@
 import 'package:dalak_blog_app/firebase_options.dart';
+import 'package:dalak_blog_app/providers/BottomNavBarProvider.dart';
 import 'package:dalak_blog_app/providers/ContentProvider.dart';
-import 'package:dalak_blog_app/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,6 @@ void main(List<String> args) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await auth.signOut();
   final prefs = await SharedPreferences.getInstance();
   runApp(
     MultiProvider(
@@ -27,6 +26,7 @@ void main(List<String> args) async {
         ChangeNotifierProvider(create: (context) => LoginFormProvider()),
         ChangeNotifierProvider(create: (context) => SignupFormProvider()),
         ChangeNotifierProvider(create: (context) => ContentProvider()),
+        ChangeNotifierProvider(create: (context) => BottomNavBarProvider()),
       ],
       child: Builder(
         builder: (context) {
