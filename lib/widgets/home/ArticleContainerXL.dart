@@ -18,7 +18,7 @@ class ArticleContainerXL extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         contentProvider.setPost(contentProvider.posts[index]);
-        contentProvider.setCategoryName(categoryName);
+        contentProvider.setCategoryNameAndId(categoryName, index);
         GoRouter.of(context).pushNamed("articleDetails");
       },
       child: Container(

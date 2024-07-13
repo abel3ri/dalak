@@ -49,6 +49,8 @@ dependencies:
   flutter_animate: ^4.5.0
   url_launcher: ^6.3.0
   share_plus: ^9.0.0
+  custom_navigation_bar: ^0.8.2
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:

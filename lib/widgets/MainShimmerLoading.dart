@@ -10,7 +10,7 @@ class MainShimmerLoading extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
         physics: BouncingScrollPhysics(),
         child: Shimmer.fromColors(
           baseColor: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade400,
