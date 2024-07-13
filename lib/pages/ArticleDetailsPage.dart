@@ -2,6 +2,8 @@ import 'package:dalak_blog_app/controllers/UrlController.dart';
 import 'package:dalak_blog_app/providers/ContentProvider.dart';
 import 'package:dalak_blog_app/widgets/CircleIcon.dart';
 import 'package:dalak_blog_app/widgets/CustomAppBar.dart';
+import 'package:dalak_blog_app/widgets/HeaderText.dart';
+import 'package:dalak_blog_app/widgets/home/ArticleContainerMD.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -39,7 +41,7 @@ class ArticlesDetailPage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         physics: BouncingScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,7 +50,7 @@ class ArticlesDetailPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  contentProvider.categoryName.toUpperCase(),
+                  contentProvider.selectedCategoryName.toUpperCase(),
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Row(
@@ -61,7 +63,7 @@ class ArticlesDetailPage extends StatelessWidget {
                     Text(
                       timeago.format(
                         DateTime.parse(
-                          contentProvider.posts.first['modified'],
+                          contentProvider.post['modified'],
                         ),
                       ),
                     ),
@@ -147,7 +149,37 @@ class ArticlesDetailPage extends StatelessWidget {
                   print("Yeay!");
                 });
               },
-            )
+            ),
+            if (contentProvider.posts.length > 1) ...[
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+              HeaderText(headerText: "Articles you might love"),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+              ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: contentProvider.posts.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  if (contentProvider.post['id'] !=
+                          contentProvider.posts[index]['id'] &&
+                      contentProvider.selectedPostCategories
+                          .contains(contentProvider.selectedCategoryName)) {
+                    return ArticleContainerMD(
+                      index: index,
+                    );
+                  }
+                  return SizedBox();
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  );
+                },
+              ),
+            ]
           ],
         ),
       ),
